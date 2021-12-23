@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useRef} from 'react'
 import Counter from './Components/Counter'
 import PostItem from './Components/PostItem'
 import PostList from './Components/PostList';
@@ -15,10 +16,14 @@ function App() {
       {id: 3, title: 'JavaScript', description: "Java - Это язык программирования высокого уровня"},
       {id: 4, title: 'JavaScript', description: "Ruby - Это язык программирования высокого уровня"},
     ])
-  const [title, setTitle] = useState('sdsdsdsd')
+  
+  
+  const bodyInputRef = useRef()
+  const [title, setTitle] = useState('')
   const addNewPost = (e) => {
     e.preventDefault()
-    console.log('asshole')
+    console.log(title)
+    console.log(bodyInputRef.current.value)
   }
 
 
@@ -27,7 +32,7 @@ function App() {
       <form>
         <MyInput onChange={e => setTitle(e.target.value)} 
         value={title} type='text' placeholder='Название поста'/>
-        <MyInput type='text' placeholder='Содержание поста'/>
+        <MyInput type='text' placeholder='Содержание поста' ref={bodyInputRef}/>
         <MyButton onClick={addNewPost}>Создать пост</MyButton>
       </form>
       <PostList posts={posts} title="Посты про языки программирования" />  
